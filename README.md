@@ -21,3 +21,7 @@
   	-> docker run --name pgadmin --network=postgres-network -p 15432:80 -e "PGADMIN_DEFAULT_EMAIL=pedro.yoda@gmail.com" -e "PGADMIN_DEFAULT_PASSWORD=123456" -d dpage/pgadmin4
 
   	-> Acessando a URL http://localhost:15432 aparecerá a tela para login no pgAdmin 4
+
+# Software para fazer as chamadas para as implementações da api foi o Insomnia
+
+  -> Em resources tem o arquivo "Insomnia" com os endpoints 
