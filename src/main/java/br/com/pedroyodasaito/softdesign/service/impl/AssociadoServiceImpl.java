@@ -2,9 +2,7 @@ package br.com.pedroyodasaito.softdesign.service.impl;
 
 import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoDTO;
 import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoInserirAtualizarDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
 import br.com.pedroyodasaito.softdesign.entity.Associado;
-import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.repository.AssociadoRepository;
 import br.com.pedroyodasaito.softdesign.service.AssociadoService;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
+import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.service.PautaService;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,9 +2,7 @@ package br.com.pedroyodasaito.softdesign.service;
 
 import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoDTO;
 import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoInserirAtualizarDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
 import br.com.pedroyodasaito.softdesign.entity.Associado;
-import br.com.pedroyodasaito.softdesign.entity.Pauta;
 
 import java.util.Optional;
 
