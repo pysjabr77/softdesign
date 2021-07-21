@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.service.impl;
 
-import br.com.pedroyodasaito.softdesign.api.dto.InserirAtualizarPautaDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.PautaDTO;
+import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
+import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.repository.PautaRepository;
 import br.com.pedroyodasaito.softdesign.service.PautaService;
@@ -19,7 +19,7 @@ public class PautaServiceImpl implements PautaService {
     }
 
     @Override
-    public Pauta criarPauta(InserirAtualizarPautaDTO dto) {
+    public Pauta criarPauta(PautaInserirAtualizarDTO dto) {
         Pauta pauta = new Pauta();
         pauta.setNome(dto.getNome());
         return this.repository.save(pauta);

@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.InserirAtualizarPautaDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.PautaDTO;
+import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
+import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.service.PautaService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -32,7 +30,7 @@ public class PautaController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer salvar(@RequestBody InserirAtualizarPautaDTO dto){
+    public Integer salvar(@RequestBody PautaInserirAtualizarDTO dto){
         Pauta pauta = service.criarPauta(dto);
         return pauta.getId();
     }
@@ -46,7 +44,7 @@ public class PautaController {
 
     @PutMapping("{id}")
     @ResponseStatus(NO_CONTENT)
-    public void atualizar(@PathVariable Integer id, @RequestBody InserirAtualizarPautaDTO dto) {
+    public void atualizar(@PathVariable Integer id, @RequestBody PautaInserirAtualizarDTO dto) {
         PautaDTO pautaDTO = service.obterPauta(id)
                 .orElseThrow(() ->
                 new ResponseStatusException(NOT_FOUND, "Pauta não encontrado."));
