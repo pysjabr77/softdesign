@@ -32,8 +32,7 @@ public class AssociadoController {
     @PostMapping
     @ResponseStatus(CREATED)
     public Integer salvar(@RequestBody AssociadoInserirAtualizarDTO dto){
-        Associado associado = service.criarAssociado(dto);
-        return associado.getId();
+        return service.criarAssociado(dto).getId();
     }
 
     @GetMapping("{id}")

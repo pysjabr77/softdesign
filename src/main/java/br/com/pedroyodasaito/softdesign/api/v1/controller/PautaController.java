@@ -31,8 +31,7 @@ public class PautaController {
     @PostMapping
     @ResponseStatus(CREATED)
     public Integer salvar(@RequestBody PautaInserirAtualizarDTO dto){
-        Pauta pauta = service.criarPauta(dto);
-        return pauta.getId();
+        return service.criarPauta(dto).getId();
     }
 
     @GetMapping("{id}")
