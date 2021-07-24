@@ -7,4 +7,5 @@ public interface AssociadoRepository extends JpaRepository<Associado, Integer> {
 
     Associado findByNome(String nome);
 
+    Associado findAssociadoByCpf(String cpf);
 }

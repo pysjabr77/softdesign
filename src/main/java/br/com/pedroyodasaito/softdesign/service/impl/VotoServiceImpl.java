@@ -11,6 +11,7 @@ import br.com.pedroyodasaito.softdesign.repository.VotoRepository;
 import br.com.pedroyodasaito.softdesign.service.VotoService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,16 @@ public class VotoServiceImpl implements VotoService {
         voto.setVoto(dto.isVoto());
         voto.setSessao(validarSessao(dto.getSessaoId()));
         voto.setAssociado(validarAssociado(dto.getAssociadoId()));
+
+        validarHorarioDoVoto(voto);
+
         repository.save(voto);
+    }
+
+    private void validarHorarioDoVoto(Voto voto) {
+        if (LocalDateTime.now().isAfter(voto.getSessao().getFim())) {
+            throw new NegocioException("Voto não será computado, pois foi realizado após o fim da sessão.");
+        }
     }
 
     private Sessao validarSessao(Integer sessaoId) {

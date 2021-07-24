@@ -14,7 +14,7 @@ public class SessaoAbrirDTO {
 
     private Integer pautaId;
 
-    private LocalDateTime inico;
+    private LocalDateTime inicio;
 
     private LocalDateTime fim;
 }
