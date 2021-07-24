@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 @EnableRabbit
 public class SoftdesignApplication {
 
-	public static final String exchangeName = "softdesign_teste_exchange";
-
 	public static final String filaName = "softdesign_teste";
 
 	public static void main(String[] args) {
