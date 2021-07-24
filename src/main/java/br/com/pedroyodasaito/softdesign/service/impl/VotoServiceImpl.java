@@ -5,7 +5,9 @@ import br.com.pedroyodasaito.softdesign.entity.Associado;
 import br.com.pedroyodasaito.softdesign.entity.Sessao;
 import br.com.pedroyodasaito.softdesign.entity.Voto;
 import br.com.pedroyodasaito.softdesign.exception.NegocioException;
-import br.com.pedroyodasaito.softdesign.mensageria.FilaEnvio;
+import br.com.pedroyodasaito.softdesign.integracao.IntegracaoCpfValidatorService;
+import br.com.pedroyodasaito.softdesign.integracao.dto.StatusVotoDTO;
+import br.com.pedroyodasaito.softdesign.mensageria.voto.FilaEnvioVoto;
 import br.com.pedroyodasaito.softdesign.repository.AssociadoRepository;
 import br.com.pedroyodasaito.softdesign.repository.SessaoRepository;
 import br.com.pedroyodasaito.softdesign.repository.VotoRepository;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,7 +29,7 @@ public class VotoServiceImpl implements VotoService {
     private final SessaoRepository sessaoRepository;
 
     @Autowired
-    private FilaEnvio filaEnvio;
+    private FilaEnvioVoto filaEnvioVoto;
 
     public VotoServiceImpl(VotoRepository repository, AssociadoRepository associadoRepository,
                            SessaoRepository sessaoRepository) {
@@ -43,8 +46,16 @@ public class VotoServiceImpl implements VotoService {
         voto.setAssociado(validarAssociado(dto.getAssociadoId()));
 
         validarHorarioDoVoto(voto);
+        validarCpfVoto(voto.getAssociado());
 
-        filaEnvio.enviar(voto);
+        filaEnvioVoto.enviar(voto);
+    }
+
+    private void validarCpfVoto(Associado associado) {
+        StatusVotoDTO statusVotoDTO = IntegracaoCpfValidatorService.validarCpf(associado.getCpf());
+        if (Objects.isNull(statusVotoDTO) || statusVotoDTO.getStatus().equals("UNABLE_TO_VOTE")) {
+            throw new NegocioException("Cpf não é valido para realizar a votação.");
+        }
     }
 
     @Override

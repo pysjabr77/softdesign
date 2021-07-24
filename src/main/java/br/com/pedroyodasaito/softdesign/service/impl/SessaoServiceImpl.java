@@ -10,8 +10,12 @@ import br.com.pedroyodasaito.softdesign.service.SessaoService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 public class SessaoServiceImpl implements SessaoService {
@@ -34,7 +38,21 @@ public class SessaoServiceImpl implements SessaoService {
         sessao.setFim(validarFimSessao(dto.getInicio(), dto.getFim()));
         sessao.setPauta(validarPauta(dto.getPautaId()));
 
-        return repository.save(sessao);
+        sessao =  repository.save(sessao);
+
+        agendarContabilizadorVotos(sessao);
+
+        return sessao;
+    }
+
+    private void agendarContabilizadorVotos(Sessao sessao) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        }, Date.from(sessao.getFim().atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     private void validarInicoSessao(LocalDateTime inicio, LocalDateTime fim) {

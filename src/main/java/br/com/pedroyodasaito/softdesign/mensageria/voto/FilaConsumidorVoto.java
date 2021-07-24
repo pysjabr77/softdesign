@@ -1,4 +1,4 @@
-package br.com.pedroyodasaito.softdesign.mensageria;
+package br.com.pedroyodasaito.softdesign.mensageria.voto;
 
 import br.com.pedroyodasaito.softdesign.SoftdesignApplication;
 import br.com.pedroyodasaito.softdesign.entity.Voto;
@@ -8,11 +8,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FilaConsumidor {
+public class FilaConsumidorVoto {
 
     private final VotoService service;
 
-    public FilaConsumidor(VotoService service) {
+    public FilaConsumidorVoto(VotoService service) {
         this.service = service;
     }
 
