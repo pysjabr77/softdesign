@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "pauta")
-public class Pauta {
+public class Pauta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

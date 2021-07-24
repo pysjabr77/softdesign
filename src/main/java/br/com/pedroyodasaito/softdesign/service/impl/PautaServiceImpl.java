@@ -3,10 +3,8 @@ package br.com.pedroyodasaito.softdesign.service.impl;
 import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
 import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
-import br.com.pedroyodasaito.softdesign.mensageria.FilaEnvio;
 import br.com.pedroyodasaito.softdesign.repository.PautaRepository;
 import br.com.pedroyodasaito.softdesign.service.PautaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,20 +18,10 @@ public class PautaServiceImpl implements PautaService {
         this.repository = repository;
     }
 
-    @Autowired
-    private FilaEnvio filaEnvio;
-
     @Override
     public Pauta criarPauta(PautaInserirAtualizarDTO dto) {
         Pauta pauta = new Pauta();
         pauta.setNome(dto.getNome());
-
-        try {
-            filaEnvio.enviar("Pauta Mensagem de teste");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return this.repository.save(pauta);
     }
 

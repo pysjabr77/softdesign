@@ -5,10 +5,12 @@ import br.com.pedroyodasaito.softdesign.entity.Associado;
 import br.com.pedroyodasaito.softdesign.entity.Sessao;
 import br.com.pedroyodasaito.softdesign.entity.Voto;
 import br.com.pedroyodasaito.softdesign.exception.NegocioException;
+import br.com.pedroyodasaito.softdesign.mensageria.FilaEnvio;
 import br.com.pedroyodasaito.softdesign.repository.AssociadoRepository;
 import br.com.pedroyodasaito.softdesign.repository.SessaoRepository;
 import br.com.pedroyodasaito.softdesign.repository.VotoRepository;
 import br.com.pedroyodasaito.softdesign.service.VotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +24,9 @@ public class VotoServiceImpl implements VotoService {
     private final AssociadoRepository associadoRepository;
 
     private final SessaoRepository sessaoRepository;
+
+    @Autowired
+    private FilaEnvio filaEnvio;
 
     public VotoServiceImpl(VotoRepository repository, AssociadoRepository associadoRepository,
                            SessaoRepository sessaoRepository) {
@@ -39,6 +44,11 @@ public class VotoServiceImpl implements VotoService {
 
         validarHorarioDoVoto(voto);
 
+        filaEnvio.enviar(voto);
+    }
+
+    @Override
+    public void consolidarVoto(Voto voto) {
         repository.save(voto);
     }
 

@@ -1,5 +1,7 @@
 package br.com.pedroyodasaito.softdesign.mensageria;
 
+import br.com.pedroyodasaito.softdesign.entity.Pauta;
+import br.com.pedroyodasaito.softdesign.entity.Voto;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -16,8 +18,8 @@ public class FilaEnvio {
         this.queue = queue;
     }
 
-    public void enviar(String msg) {
-        System.out.println("Enviando msg: " + msg);
-        rabbitTemplate.convertAndSend(queue.getName(), msg);
+    public void enviar(Voto voto) {
+        System.out.println("Enviando msg: " + voto.toString());
+        rabbitTemplate.convertAndSend(queue.getName(), voto);
     }
 }
