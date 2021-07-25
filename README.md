@@ -10,7 +10,7 @@
   - Fazer a configuração url, usuario e senha no arquivo "application-development.properties" ou "application-production.properties" 
     dependendo do profile escolhido no arquivo "application.properties";
     Obs.: Para o ambiente de desenvolvimento o hibernate está configurado para criar e drop a cada inicialização.
-  - Ter RabbitMQ instalado/configurado com a fila "softdesign_teste";
+  - Ter RabbitMQ instalado/configurado com a fila "softdesign_teste" e "softdesign_teste2";
     Obs.: Foi utilizado uma instalação docker conforme descrito a baixo.
     
 # Banco de Dados

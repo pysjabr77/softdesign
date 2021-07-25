@@ -13,7 +13,9 @@ import br.com.pedroyodasaito.softdesign.repository.SessaoRepository;
 import br.com.pedroyodasaito.softdesign.repository.VotoRepository;
 import br.com.pedroyodasaito.softdesign.service.VotoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -52,9 +54,15 @@ public class VotoServiceImpl implements VotoService {
     }
 
     private void validarCpfVoto(Associado associado) {
-        StatusVotoDTO statusVotoDTO = IntegracaoCpfValidatorService.validarCpf(associado.getCpf());
-        if (Objects.isNull(statusVotoDTO) || statusVotoDTO.getStatus().equals("UNABLE_TO_VOTE")) {
-            throw new NegocioException("Cpf não é valido para realizar a votação.");
+        try {
+            StatusVotoDTO statusVotoDTO = IntegracaoCpfValidatorService.validarCpf(associado.getCpf().replaceAll("[^0-9,]", ""));
+            if (Objects.isNull(statusVotoDTO) || statusVotoDTO.getStatus().equals("UNABLE_TO_VOTE")) {
+                throw new NegocioException("CPF não é valido para realizar a votação.");
+            }
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                throw new NegocioException("CPF não encontrado para realizar a votação.");
+            }
         }
     }
 

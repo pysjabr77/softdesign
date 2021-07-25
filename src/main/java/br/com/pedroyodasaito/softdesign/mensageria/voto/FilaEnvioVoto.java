@@ -10,15 +10,15 @@ public class FilaEnvioVoto {
 
     private final RabbitTemplate rabbitTemplate;
 
-    private final Queue queue;
+    private final Queue queueVotacao;
 
-    public FilaEnvioVoto(RabbitTemplate rabbitTemplate, Queue queue) {
+    public FilaEnvioVoto(RabbitTemplate rabbitTemplate, Queue queueVotacao) {
         this.rabbitTemplate = rabbitTemplate;
-        this.queue = queue;
+        this.queueVotacao = queueVotacao;
     }
 
     public void enviar(Voto voto) {
         System.out.println("Enviando msg: " + voto.toString());
-        rabbitTemplate.convertAndSend(queue.getName(), voto);
+        rabbitTemplate.convertAndSend(queueVotacao.getName(), voto);
     }
 }

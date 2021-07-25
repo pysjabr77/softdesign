@@ -1,12 +1,16 @@
 package br.com.pedroyodasaito.softdesign.service.impl;
 
+import br.com.pedroyodasaito.softdesign.api.dto.contabiliza.ContabilizacaoDTO;
 import br.com.pedroyodasaito.softdesign.api.dto.sessao.SessaoAbrirDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.entity.Sessao;
 import br.com.pedroyodasaito.softdesign.exception.NegocioException;
+import br.com.pedroyodasaito.softdesign.mensageria.contabilizavotacao.FilaEnvioContabilizaVotacao;
 import br.com.pedroyodasaito.softdesign.repository.PautaRepository;
 import br.com.pedroyodasaito.softdesign.repository.SessaoRepository;
+import br.com.pedroyodasaito.softdesign.service.ContabilizaService;
 import br.com.pedroyodasaito.softdesign.service.SessaoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,9 +27,15 @@ public class SessaoServiceImpl implements SessaoService {
 
     private final PautaRepository pautaRepository;
 
-    public SessaoServiceImpl(SessaoRepository repository, PautaRepository pautaRepository) {
+    private final ContabilizaService contabilizaService;
+
+    @Autowired
+    private FilaEnvioContabilizaVotacao filaEnvioContabilizaVotacao;
+
+    public SessaoServiceImpl(SessaoRepository repository, PautaRepository pautaRepository, ContabilizaService contabilizaService) {
         this.repository = repository;
         this.pautaRepository = pautaRepository;
+        this.contabilizaService = contabilizaService;
     }
 
     @Override
@@ -50,9 +60,10 @@ public class SessaoServiceImpl implements SessaoService {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-
+                ContabilizacaoDTO contabilizacaoDTO = contabilizaService.contabilizarVotacao(sessao.getId());
+                filaEnvioContabilizaVotacao.enviar(contabilizacaoDTO);
             }
-        }, Date.from(sessao.getFim().atZone(ZoneId.systemDefault()).toInstant()));
+        }, Date.from(sessao.getFim().plusMinutes(1).atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     private void validarInicoSessao(LocalDateTime inicio, LocalDateTime fim) {

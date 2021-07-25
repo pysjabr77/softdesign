@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.mensageria.voto;
 
-import br.com.pedroyodasaito.softdesign.SoftdesignApplication;
+import br.com.pedroyodasaito.softdesign.config.AppConfig;
 import br.com.pedroyodasaito.softdesign.entity.Voto;
 import br.com.pedroyodasaito.softdesign.service.VotoService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,7 +16,7 @@ public class FilaConsumidorVoto {
         this.service = service;
     }
 
-    @RabbitListener(queues = {SoftdesignApplication.filaName})
+    @RabbitListener(queues = {AppConfig.FILA_NAME_VOTACAO})
     public void receberMsg(@Payload Voto voto) {
         System.out.println("Mensagem recebida: " + voto.toString());
         service.consolidarVoto(voto);
