@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.voto.VotarDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.voto.VotarDTO;
 import br.com.pedroyodasaito.softdesign.service.VotoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

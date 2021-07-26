@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.sessao.SessaoAbrirDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.sessao.SessaoAbrirDTO;
 import br.com.pedroyodasaito.softdesign.service.SessaoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

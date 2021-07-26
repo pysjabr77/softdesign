@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.service;
 
-import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.pauta.PautaInserirAtualizarDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.pauta.PautaDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.pauta.PautaInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 
 import java.util.Optional;

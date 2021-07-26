@@ -1,4 +1,4 @@
-package br.com.pedroyodasaito.softdesign.api.dto.voto;
+package br.com.pedroyodasaito.softdesign.api.v1.dto.voto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

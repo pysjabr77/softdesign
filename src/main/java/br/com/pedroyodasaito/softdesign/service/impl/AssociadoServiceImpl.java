@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.service.impl;
 
-import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoInserirAtualizarDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.associado.AssociadoDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.associado.AssociadoInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Associado;
 import br.com.pedroyodasaito.softdesign.exception.NegocioException;
 import br.com.pedroyodasaito.softdesign.repository.AssociadoRepository;

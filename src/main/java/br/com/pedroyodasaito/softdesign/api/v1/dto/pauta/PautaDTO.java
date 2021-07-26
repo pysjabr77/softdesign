@@ -1,14 +1,15 @@
-package br.com.pedroyodasaito.softdesign.api.dto.associado;
+package br.com.pedroyodasaito.softdesign.api.v1.dto.pauta;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssociadoDTO {
+public class PautaDTO  implements Serializable {
     private Integer id;
     private String nome;
-    private String cpf;
 }

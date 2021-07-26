@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.mensageria.contabilizavotacao;
 
-import br.com.pedroyodasaito.softdesign.api.dto.contabiliza.ContabilizacaoDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.contabiliza.ContabilizacaoDTO;
 import br.com.pedroyodasaito.softdesign.config.AppConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;

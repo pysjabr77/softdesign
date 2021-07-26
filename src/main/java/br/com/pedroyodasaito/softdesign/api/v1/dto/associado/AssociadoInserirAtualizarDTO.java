@@ -1,4 +1,4 @@
-package br.com.pedroyodasaito.softdesign.api.dto.associado;
+package br.com.pedroyodasaito.softdesign.api.v1.dto.associado;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package br.com.pedroyodasaito.softdesign.api.dto.sessao;
+package br.com.pedroyodasaito.softdesign.api.v1.dto.sessao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

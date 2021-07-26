@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.service.impl;
 
-import br.com.pedroyodasaito.softdesign.api.dto.contabiliza.ContabilizacaoDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.sessao.SessaoAbrirDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.contabiliza.ContabilizacaoDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.sessao.SessaoAbrirDTO;
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.entity.Sessao;
 import br.com.pedroyodasaito.softdesign.exception.NegocioException;

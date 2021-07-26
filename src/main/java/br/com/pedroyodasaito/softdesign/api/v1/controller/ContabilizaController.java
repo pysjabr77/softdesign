@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.contabiliza.ContabilizacaoDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.contabiliza.ContabilizacaoDTO;
 import br.com.pedroyodasaito.softdesign.service.ContabilizaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

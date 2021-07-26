@@ -2,52 +2,42 @@ package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import br.com.pedroyodasaito.softdesign.repository.PautaRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
+import java.util.Objects;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = PautaController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PautaControllerTest {
 
+    @LocalServerPort
+    private int port;
+
     @Autowired
-    private MockMvc mockMvc;
+    private TestRestTemplate restTemplate;
 
-    ObjectMapper mapper = new ObjectMapper();
-
-    @MockBean
+    @Autowired
     private PautaRepository repository;
 
     @Test
     void save() throws Exception {
         Pauta pauta = new Pauta();
+        pauta.setId(2);
         pauta.setNome("Pauta 1");
 
-        when(repository.save(any(Pauta.class))).thenReturn(pauta);
-
-        this.mockMvc.perform(post("/v1/pauta")
-                .content(mapper.writeValueAsString(pauta))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nome").value(pauta.getNome()));
+        ResponseEntity<Integer> response = restTemplate
+                .postForEntity(new URL("http://localhost:" + port + "/api/v1/pauta").toString(),
+                        pauta, Integer.class);
+        assertEquals(201, response.getStatusCodeValue());
+        assertEquals(2, response.getBody());
     }
 
     @Test
@@ -55,13 +45,14 @@ class PautaControllerTest {
         Pauta pauta = new Pauta();
         pauta.setNome("Pauta 1");
 
-        List<Pauta> list = new ArrayList<>();
-        list.add(pauta);
+        pauta = repository.save(pauta);
 
-        when(repository.findAll()).thenReturn(list);
+        ResponseEntity<String> result = restTemplate
+                .getForEntity(new URL("http://localhost:" + port + "/api/v1/pauta/" +
+                        pauta.getId()).toString(), String.class);
+        assertEquals(200, result.getStatusCodeValue());
+        assertTrue(Objects.requireNonNull(result.getBody()).contains("Pauta 1"));
 
-        this.mockMvc.perform(get("/v1/pauta"))
-                        .andExpect(status().isOk())
-                        .andExpect(content().string(containsString("Pauta 1")));
+        repository.delete(pauta);
     }
 }

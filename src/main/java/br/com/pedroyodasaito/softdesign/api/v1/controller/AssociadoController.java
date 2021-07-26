@@ -1,7 +1,7 @@
 package br.com.pedroyodasaito.softdesign.api.v1.controller;
 
-import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoDTO;
-import br.com.pedroyodasaito.softdesign.api.dto.associado.AssociadoInserirAtualizarDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.associado.AssociadoDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.associado.AssociadoInserirAtualizarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Associado;
 import br.com.pedroyodasaito.softdesign.service.AssociadoService;
 import org.springframework.web.bind.annotation.DeleteMapping;

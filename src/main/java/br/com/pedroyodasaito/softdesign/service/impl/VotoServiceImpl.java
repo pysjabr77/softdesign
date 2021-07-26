@@ -1,6 +1,6 @@
 package br.com.pedroyodasaito.softdesign.service.impl;
 
-import br.com.pedroyodasaito.softdesign.api.dto.voto.VotarDTO;
+import br.com.pedroyodasaito.softdesign.api.v1.dto.voto.VotarDTO;
 import br.com.pedroyodasaito.softdesign.entity.Associado;
 import br.com.pedroyodasaito.softdesign.entity.Sessao;
 import br.com.pedroyodasaito.softdesign.entity.Voto;

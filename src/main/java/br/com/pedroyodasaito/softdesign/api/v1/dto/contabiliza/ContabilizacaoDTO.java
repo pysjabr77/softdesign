@@ -1,4 +1,4 @@
-package br.com.pedroyodasaito.softdesign.api.dto.contabiliza;
+package br.com.pedroyodasaito.softdesign.api.v1.dto.contabiliza;
 
 import br.com.pedroyodasaito.softdesign.entity.Pauta;
 import lombok.AllArgsConstructor;
